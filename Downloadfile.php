@@ -1,3 +1,5 @@
+
+
 <?php 
 include("Functions.php");
 include("connection.php"); 
@@ -17,12 +19,20 @@ include("Sessions.php");
 
 				$FilePath='uploads/'.$Filename;
 				if(!empty($Filename) && file_exists($FilePath)){
+	 
+
+   
+    
 
 					header("Cache-Control:public");
 					header("Content-Description:File Transfer");
 					header("Content-Disposition: attachment; filename=$Filename");
+					 header('Expires: 0');
+    					header('Pragma: public');
 					header("Content-Type: application/octet-stream");
 					header('Cache-Control: must-revalidate');
+					header('Content-Length: ' . filesize($FilePath));
+					ob_end_clean();
 					readfile($FilePath);
 					exit;
 				}else{
